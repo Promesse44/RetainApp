@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: Inter, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    @apply bg-gray-50 text-gray-900;
+  }
+}
