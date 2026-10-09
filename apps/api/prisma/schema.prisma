@@ -31,6 +31,8 @@ model User {
   updatedAt    DateTime  @updatedAt
   expenses     Expense[]
   budgets      Budget[]
+
+  @@map("users")
 }
 
 model Category {
