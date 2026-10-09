@@ -78,9 +78,11 @@ export function BudgetPage() {
     <div className="flex items-center justify-center h-64 text-zinc-400 text-sm">Loading…</div>
   )
 
-  const budgetPct = dashboard && dashboard.budgetAmount > 0
-    ? Math.min(100, (dashboard.totalSpent / dashboard.budgetAmount) * 100)
-    : 0
+  const budgetAmount = dashboard?.budgetAmount ?? 0
+  const totalSpent = dashboard?.totalSpent ?? 0
+  const remaining = dashboard?.remaining ?? 0
+  const hasBudget = budgetAmount > 0
+  const budgetPct = hasBudget ? Math.min(100, (totalSpent / budgetAmount) * 100) : 0
 
   const status = dashboard?.budgetStatus ?? 'no_budget'
 
@@ -102,8 +104,8 @@ export function BudgetPage() {
         {/* Progress */}
         <div>
           <div className="flex justify-between text-xs text-zinc-500 mb-1.5">
-            <span>${fmt(dashboard?.totalSpent ?? 0)} spent</span>
-            <span>{dashboard?.budgetAmount ? `$${fmt(dashboard.budgetAmount)} budget` : 'No budget'}</span>
+            <span>${fmt(totalSpent)} spent</span>
+            <span>{hasBudget ? `$${fmt(budgetAmount)} budget` : 'No budget'}</span>
           </div>
           <div className="h-2.5 bg-zinc-100 rounded-full overflow-hidden">
             <div
@@ -111,11 +113,11 @@ export function BudgetPage() {
               style={{ width: `${budgetPct}%` }}
             />
           </div>
-          {dashboard?.budgetAmount > 0 && (
+          {hasBudget && (
             <p className="text-xs text-zinc-400 mt-1.5">
-              {dashboard.remaining >= 0
-                ? `$${fmt(dashboard.remaining)} remaining`
-                : `$${fmt(Math.abs(dashboard.remaining))} over budget`}
+              {remaining >= 0
+                ? `$${fmt(remaining)} remaining`
+                : `$${fmt(Math.abs(remaining))} over budget`}
             </p>
           )}
         </div>

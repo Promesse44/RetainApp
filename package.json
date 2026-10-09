@@ -5,6 +5,9 @@
     "apps/api",
     "apps/web"
   ],
+  "prisma": {
+    "schema": "apps/api/prisma/schema.prisma"
+  },
   "scripts": {
     "dev:api": "npm run dev --workspace=apps/api",
     "dev:web": "npm run dev --workspace=apps/web",
